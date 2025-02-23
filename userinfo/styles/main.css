@@ -1,0 +1,302 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --error-color: #e74c3c;
+    --text-color: #2c3e50;
+    --border-color: #bdc3c7;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text-color);
+}
+
+.header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.loading-indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+.loading .loading-indicator {
+    display: block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination button:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination .page-info {
+    margin: 0 10px;
+    color: var(--text-color);
+}
+
+.events-list {
+    margin-bottom: 20px;
+}
+
+.event-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 0;
+}
+
+.user-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+.user-item:hover {
+    background-color: #f5f5f5;
+}
+
+.user-item.selected {
+    background-color: #e3f2fd;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-primary {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.user-secondary {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.user-device {
+    font-size: 0.85em;
+    color: #888;
+}
+
+.user-platform {
+    text-transform: capitalize;
+    color: var(--primary-color);
+}
+
+.empty, .error, .loading {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.error {
+    color: var(--error-color);
+}
+.user-list-container h2 sub {
+    font-size: 0.6em;
+    color: #666;
+    margin-left: 4px;
+    font-weight: normal;
+}
+
+/* ...existing styles... */
+
+.user-details {
+    padding: 20px;
+}
+
+.detail-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.detail-section h3 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+}
+
+.detail-section p {
+    margin: 5px 0;
+    color: var(--text-color);
+}
+
+.no-selection {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.user-summary {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.stats-info {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.events-section {
+    margin-top: 20px;
+}
+
+.event-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.event-type {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.event-time {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.event-score {
+    color: #2ecc71;
+    margin: 5px 0;
+}
+
+.event-device {
+    font-size: 0.85em;
+    color: #888;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    padding: 10px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.pagination button:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination .page-info {
+    min-width: 100px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+
+/* ...existing styles... */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    padding: 10px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.pagination button:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination .page-info {
+    min-width: 120px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.events-section h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}

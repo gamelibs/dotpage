@@ -1,0 +1,102 @@
+dottest/index.html
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>游戏数据上报测试</title>
+        <link rel="stylesheet" href="styles.css" />
+
+        <script type="module" src="../apisdk/sdk-project/dist/sdk.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>游戏数据上报测试面板</h1>
+            </header>
+
+            <main>
+                <section class="event-panel">
+                    <h2>基础事件</h2>
+                    <!-- <button class="btn primary" onclick="(function(){typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportGameEnter()})()">游戏进入</button> -->
+                    <!-- <button class="btn" onclick="testGameUpdateTime()">更新游戏时长</button> -->
+                    <button
+                        class="btn primary"
+                        onclick="(function(){
+                        typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportGameEnter()
+                    })()"
+                    >
+                        游戏进入
+                    </button>
+
+                    <!-- 修改 reportScoreUpdate 为 reportGameScore -->
+                    <button
+                        class="btn"
+                        onclick="(function(){
+                        typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportGameScore(100)
+                    })()"
+                    >
+                        更新游戏分数
+                    </button>
+
+                    <!-- 修改 reportLevelEnter 为 reportLevelProgress -->
+                    <button
+                        class="btn"
+                        onclick="(function(){
+                        typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportLevelProgress(1, 0)
+                    })()"
+                    >
+                        关卡进入
+                    </button>
+                </section>
+
+                <section class="control-panel">
+                    <h2>游戏控制</h2>
+                    <div class="control-group">
+                        <label for="sound-select">声音控制:</label>
+                        <select id="sound-select" onchange="(function(v){typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportSoundState(v)})(this.value)">
+                            <option value="true">开启</option>
+                            <option value="false">关闭</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="ads-select">广告控制:</label>
+                        <select id="ads-select" onchange="(function(v){typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportAdsState(v)})(this.value)">
+                            <option value="true">开启</option>
+                            <option value="false">关闭</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="framerate">帧率设置:</label>
+                        <select
+                            id="framerate"
+                            onchange="(function(v){
+                            typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportFpsSet(v)
+                        })(this.value)"
+                        >
+                            <option value="30">30 FPS</option>
+                            <option value="60">60 FPS</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="difficulty">难度设置:</label>
+                        <select id="difficulty" onchange="(function(v){
+                            typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportDifficultySet(v)
+                        })(this.value)">
+                            <option value="1">简单</option>
+                            <option value="2">中等</option>
+                            <option value="3">困难</option>
+                        </select>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <div id="response" class="response-panel"></div>
+            </footer>
+        </div>
+    </body>
+</html>
