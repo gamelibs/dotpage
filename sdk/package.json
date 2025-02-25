@@ -1,0 +1,21 @@
+{
+  "name": "sdk-project",
+  "version": "1.0.0",
+  "description": "A JavaScript SDK project for managing game functionalities including ads, sound, and reporting.",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "terser-webpack-plugin": "^5.3.11",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0",
+    "webpack-dev-server": "^3.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

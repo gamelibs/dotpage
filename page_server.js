@@ -15,7 +15,7 @@ app.use(cors({
 }));
 
 // 设置静态文件目录，允许访问当前目录下的所有资源
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(path.join(__dirname, './')));
 
 // 启动服务器，监听指定端口
 app.listen(PORT, IP, () => {

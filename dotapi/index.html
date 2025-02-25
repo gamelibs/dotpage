@@ -7,10 +7,10 @@ dottest/index.html
         <title>游戏数据上报测试</title>
         <link rel="stylesheet" href="styles.css" />
 
-        <script type="module" src="../apisdk/sdk-project/dist/sdk.min.js"></script>
+        <script type="module" src="../sdk-project/src/init.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container" id="adcontent">
             <header>
                 <h1>游戏数据上报测试面板</h1>
             </header>
@@ -21,7 +21,7 @@ dottest/index.html
                     <!-- <button class="btn primary" onclick="(function(){typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportGameEnter()})()">游戏进入</button> -->
                     <!-- <button class="btn" onclick="testGameUpdateTime()">更新游戏时长</button> -->
                     <button
-                        class="btn primary"
+                        class="btn"
                         onclick="(function(){
                         typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportGameEnter()
                     })()"
@@ -47,6 +47,33 @@ dottest/index.html
                     })()"
                     >
                         关卡进入
+                    </button>
+                    <p>^^^</p>
+                    <button
+                        class="btn primary"
+                        onclick="(function(){
+                        typeof __woso!='undefined'&&!__woso.isDot&&__woso.AdManager.showAd('fristAd')
+                    })()"
+                    >
+                        请求开屏
+                    </button>
+
+                    <button
+                        class="btn primary"
+                        onclick="(function(){
+                        typeof __woso!='undefined'&&!__woso.isDot&&__woso.AdManager.showAd('interstitial')
+                    })()"
+                    >
+                        请求插页
+                    </button>
+
+                    <button
+                        class="btn primary"
+                        onclick="(function(){
+                        typeof __woso!='undefined'&&!__woso.isDot&&__woso.AdManager.showAd('rewarded')
+                    })()"
+                    >
+                        请求视频
                     </button>
                 </section>
 
@@ -83,9 +110,12 @@ dottest/index.html
 
                     <div class="control-group">
                         <label for="difficulty">难度设置:</label>
-                        <select id="difficulty" onchange="(function(v){
+                        <select
+                            id="difficulty"
+                            onchange="(function(v){
                             typeof __woso!='undefined'&&!__woso.isDot&&__woso.ReportManager.reportDifficultySet(v)
-                        })(this.value)">
+                        })(this.value)"
+                        >
                             <option value="1">简单</option>
                             <option value="2">中等</option>
                             <option value="3">困难</option>

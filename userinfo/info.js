@@ -1,4 +1,5 @@
-const ip_address = "http://192.168.1.157:13258";
+// const ip_address = "http://192.168.1.157:13258";
+const ip_address = "https://save.gameslog.top";
 const ITEMS_PER_PAGE = 5; // 每页显示的数量
 
 let currentUserPage = 1;
