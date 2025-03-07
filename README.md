@@ -1,4 +1,1 @@
-# dotpage
-此项目用户测试上报客户端
-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
-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
+# 此项目用户测试上报客户端
