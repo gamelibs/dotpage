@@ -14,7 +14,7 @@ export const ReportManager = {
       this.userId = getOrGenerateUserId();
       this.gameSessionId = generateUUID();
 
-      __woso.isDeug && console.log('初始化ID:', {
+      OVO.isDeug && console.log('初始化ID:', {
         userId: this.userId,
         gameSessionId: this.gameSessionId
       });
@@ -36,7 +36,7 @@ export const ReportManager = {
 
   userEvent: async function (eventType, data = {}) {
     if (CONFIG.LOCAL_MODE) {
-      __woso.isDeug && console.log('Local mode - Event:', eventType, data);
+      OVO.isDeug && console.log('Local mode - Event:', eventType, data);
       return;
     }
 
@@ -66,7 +66,7 @@ export const ReportManager = {
 
   reportEvent: async function (eventType, data = {}) {
     if (CONFIG.LOCAL_MODE) {
-      __woso.isDeug && console.log('Local mode - Event:', eventType, data);
+      OVO.isDeug && console.log('Local mode - Event:', eventType, data);
       return;
     }
 
@@ -138,7 +138,7 @@ export const ReportManager = {
   sendReport: function (url, data, retries = 1) {
     if (CONFIG.LOCAL_MODE) return;
 
-    __woso.isDeug && console.log("正在上报:", JSON.stringify(data, null, 2));
+    OVO.isDeug && console.log("正在上报:", JSON.stringify(data, null, 2));
 
     const attempt = (currentRetries) => {
       fetch(url, {
@@ -153,7 +153,7 @@ export const ReportManager = {
             : response.text();
         })
         .then(result => {
-          __woso.isDeug && console.log('上报成功:', typeof result === 'string' ? result : JSON.stringify(result, null, 2));
+          OVO.isDeug && console.log('上报成功:', typeof result === 'string' ? result : JSON.stringify(result, null, 2));
         })
         .catch(error => {
           if (currentRetries > 0) {

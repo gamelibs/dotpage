@@ -1,5 +1,5 @@
-const isProxy = false;
-const baseUrl = isProxy ? "http://192.168.1.157:13258" : "https://save.gameslog.top";
+const isProxy = true;
+const baseUrl = isProxy ? "http://localhost:13258" : "https://save.gameslog.top";
          
 export const CONFIG = {
     isProxy,

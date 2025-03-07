@@ -1,34 +1,41 @@
 export const AdManager = {
   isAds: true,
+  platform: "",
+  platformType: 0,
   set: function (value) {
     this.isAds = value;
   },
   open: function () {
     this.set(true);
-    __woso.isDeug && console.log("启用广告");
+    OVO.isDeug && console.log("启用广告");
   },
   close: function () {
     this.set(false);
-    __woso.isDeug && console.log("禁用广告");
+    OVO.isDeug && console.log("禁用广告");
   },
 
   adInstance: null,
 
   loadAdSDK: function () {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = "https://www.cpsense.com/public/PRESDK3.0.1.js";
-      script.async = true;
+    if(this.isAds && this.platformType !== 0){
 
-      script.onload = () => {
-        this.initAdSDK();
-        resolve();
-      };
-
-      script.onerror = reject;
-
-      document.head.appendChild(script);
-    });
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = "https://www.cpsense.com/public/PRESDK3.0.1.js";
+        script.async = true;
+  
+        script.onload = () => {
+          this.initAdSDK();
+          resolve();
+        };
+  
+        script.onerror = reject;
+  
+        document.head.appendChild(script);
+      });
+    }else{
+      return null;
+    }
   },
 
   initAdSDK: function () {
@@ -40,6 +47,11 @@ export const AdManager = {
   },
 
   showAd: function (type, callback) {
+
+    if(this.platformType !== 0) {
+      console.log("no pl")
+      return;
+    }
     if (!this.adInstance) {
       console.warn("Ad SDK not initialized");
       callback?.();
@@ -48,15 +60,15 @@ export const AdManager = {
 
     switch (type) {
       case 'fristAd':
-        __woso.isDeug && console.log("请求开屏广告")
+        OVO.isDeug && console.log("请求开屏广告")
         this.showFristAd;
         break;
       case 'interstitial':
-        __woso.isDeug && console.log("请求插页广告")
+        OVO.isDeug && console.log("请求插页广告")
         this.showInterstitialAd(callback);
         break;
       case 'rewarded':
-        __woso.isDeug && console.log("请求视频广告")
+        OVO.isDeug && console.log("请求视频广告")
         this.showRewardedAd(callback);
         break;
     }
@@ -80,7 +92,7 @@ export const AdManager = {
       },
       error(err) {
         isTimeOut = true
-        __woso.isDeug && console.log('fristAd', err)
+        OVO.isDeug && console.log('fristAd', err)
         // wsdk.gameDot(DOT.AD_ERROR, 'fristAd ' + err)
 
       },
@@ -89,7 +101,7 @@ export const AdManager = {
     const st_time = setTimeout(() => {
       clearTimeout(st_time)
       if (!isTimeOut) {
-        __woso.isDeug && console.log('fristAd timeout 3s')
+        OVO.isDeug && console.log('fristAd timeout 3s')
         // wsdk.gameDot(DOT.AD_ERROR, 'fristAd timeout')
 
       }
@@ -110,12 +122,12 @@ export const AdManager = {
           // wsdk.gameDot(DOT.GAME_INTERSTITIAL_VIEWED, 'afterAd viewed')
 
           callback && callback(true)
-          __woso.isDeug && console.log('afterAd-yes')
+          OVO.isDeug && console.log('afterAd-yes')
         },
         error(err) {
           isAdError = true
           callback && callback(false)
-          __woso.isDeug && console.log('afterAd-Error-no')
+          OVO.isDeug && console.log('afterAd-Error-no')
         },
       })
 
@@ -125,7 +137,7 @@ export const AdManager = {
       if (!isAdError) {
         // wsdk.gameDot(DOT.AD_ERROR, 'inter timeout')
         callback && callback(false)
-        __woso.isDeug && console.log('afterAd-Error-timeout')
+        OVO.isDeug && console.log('afterAd-Error-timeout')
       }
     }, 2000)
   },
@@ -142,7 +154,7 @@ export const AdManager = {
         // wsdk.gameDot(DOT.GAME_REWARD_DISMISSED)
 
         callback && callback(false)
-        __woso.isDeug && console.log('afterAd-v-no')
+        OVO.isDeug && console.log('afterAd-v-no')
 
       },
       adViewed() {
@@ -150,14 +162,14 @@ export const AdManager = {
         //wsdk.gameDot(DOT.GAME_REWARD_VIEWED)
 
         callback && callback(true)
-        __woso.isDeug && console.log('afterAd-v-yes')
+        OVO.isDeug && console.log('afterAd-v-yes')
       },
       error(err) {
         isAdError = true
         //wsdk.gameDot(DOT.AD_ERROR, 'video' + err)
 
         callback && callback(false)
-        __woso.isDeug && console.log('afterAd-Error-no')
+        OVO.isDeug && console.log('afterAd-Error-no')
       },
     })
 
@@ -168,7 +180,7 @@ export const AdManager = {
         // wsdk.gameDot(DOT.AD_ERROR, 'video timerout')
 
         callback && callback(false)
-        __woso.isDeug && console.log('afterAd-v-timeout')
+        OVO.isDeug && console.log('afterAd-v-timeout')
       }
     }, 2000)
   }

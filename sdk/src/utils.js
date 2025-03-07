@@ -90,6 +90,79 @@ const Utils = {
       timer = setTimeout(() => fn.apply(this, args), delay);
     }
   }
+
+  // 深度copy对象
+  export function deepCopy(obj) {
+    if (typeof obj !== 'object' || obj === null) {
+        return obj;
+    }
+
+    let clone;
+    if (Array.isArray(obj)) {
+        clone = [];
+        for (let i = 0; i < obj.length; i++) {
+            clone[i] = deepCopy(obj[i]);
+        }
+    } else {
+        clone = {};
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                clone[key] = deepCopy(obj[key]);
+            }
+        }
+    }
+    return clone;
+}
+
+// 异步加载
+export function loadScript(src, type = 'text/javascript',async = true, crossorigin = null) {
+  return new Promise((resolve, reject) => {
+      // 创建一个 script 元素
+      const script = document.createElement('script');
+      // 设置 script 的 src 属性
+      script.src = src;
+      // 设置 script 的 type 属性
+      script.type = type;
+      script.async = async;
+      // 如果提供了 crossorigin 属性，则进行设置
+      if (crossorigin) {
+          script.crossOrigin = crossorigin;
+      }
+
+      // 监听 script 加载成功事件
+      script.onload = () => {
+          resolve();
+      };
+
+      // 监听 script 加载失败事件
+      script.onerror = () => {
+          reject(new Error(`Failed to load script: ${src}`));
+      };
+
+      // 将 script 元素添加到文档的 head 中
+      document.head.appendChild(script);
+  });
+}
+
+// 深度合并函数
+export function deepMerge(target, ...sources) {
+  if (!sources.length) return target;
+  const source = sources.shift();
+
+  if (typeof target === 'object' && typeof source === 'object') {
+      for (const key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+              if (typeof source[key] === 'object' && typeof target[key] === 'object') {
+                  target[key] = deepMerge(target[key], source[key]);
+              } else {
+                  target[key] = source[key];
+              }
+          }
+      }
+  }
+
+  return deepMerge(target, ...sources);
+}
   
   // 导出工具对象
   export default Utils;

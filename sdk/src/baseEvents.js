@@ -5,11 +5,11 @@ export const SoundManager = {
   },
   pauseAll: function() {
     this.set(false);
-    __woso.isDeug && console.log("暂停声音");
+    OVO.isDeug && console.log("暂停声音");
   },
   resumeAll: function() {
     this.set(true); 
-    __woso.isDeug && console.log("恢复声音");
+    OVO.isDeug && console.log("恢复声音");
   }
 };
 
@@ -18,11 +18,11 @@ export const GameSettings = {
   difficulty: 0,
   setFps: function(value) {
     this.fps = value;
-    __woso.isDeug && console.log("设置FPS:", value);
+    OVO.isDeug && console.log("设置FPS:", value);
   },
   setDifficulty: function(value) {
     this.difficulty = value;
-    __woso.isDeug && console.log("设置难度:", value);
+    OVO.isDeug && console.log("设置难度:", value);
   }
 };
 

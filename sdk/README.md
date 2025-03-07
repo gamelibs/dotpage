@@ -24,16 +24,16 @@
   根据URL参数控制游戏功能
 /**
  * 根据URL参数控制游戏功能
- * typeof __woso !="undefine" && __woso.isDot; // 上报
+ * typeof OVO !="undefine" && OVO.isDot; // 上报
  *
- * typeof __woso !="undefine" && __woso.isDot && !__woso.SoundManager.isSound; // 声音
+ * typeof OVO !="undefine" && OVO.isDot && !OVO.SoundManager.isSound; // 声音
  *
- * typeof __woso !="undefine" && __woso.isDot && !__woso.AdManager.isAds; // 广告
+ * typeof OVO !="undefine" && OVO.isDot && !OVO.AdManager.isAds; // 广告
  * 
  * 关卡
- * typeof __woso!='undefined' && __woso.isDot && __woso.ReportManager.reportLevelProgress(level_number, progress) 
+ * typeof OVO!='undefined' && OVO.isDot && OVO.ReportManager.reportLevelProgress(level_number, progress) 
  * 分数,金币
- * typeof __woso!='undefined' && __woso.isDot && __woso.ReportManager.reportGameScore(100)
+ * typeof OVO!='undefined' && OVO.isDot && OVO.ReportManager.reportGameScore(100)
  */
 ```
 // 
@@ -55,4 +55,32 @@
 </script>
 
 ...游戏内容
-</div>
+
+# sdk使用示例
+```
+// // 动态加载外部脚本的方法
+function loadScript(url, type = "module") {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = url;
+        script.type = type;
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Failed to load script: ${url}`));
+        document.head.appendChild(script);
+    });
+}
+loadScript("http://localhost:13260/sdk/src/init.js")
+    .then(() => {
+        
+        window.__woso = OVO.deepCopy(OVO);
+    })
+    .then(() => {
+      //处理游戏进程
+    })
+    .catch((err) => {
+        console.error("Error during initialization:", err);
+    });
+```
+# // 深度合并
+window.__woso = deepMerge({}, window.top__woso, window.__woso);

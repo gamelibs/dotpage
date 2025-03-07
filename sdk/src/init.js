@@ -2,18 +2,25 @@ import { CONFIG } from './config.js';
 import { SoundManager, GameSettings } from './baseEvents.js';
 import { AdManager } from './adManager.js';
 import { ReportManager } from './reportManager.js';
+import { deepCopy, loadScript, deepMerge } from './utils.js';
+import { TopCallback } from './CallManager.js';
 
+const OVO = {
 
-const SDK = {
+    initializeOVO: async function () {
 
-    initializeSDK: async function () {
-
-        window.__woso = {
+        window.OVO = {
             SoundManager,
             GameSettings,
             isDot: false,
             ReportManager,
-            isDebug: false
+            AdManager,
+            showAd: AdManager.showAd(),
+            isDebug: false,
+            deepCopy,
+            deepMerge,
+            loadScript,
+            TopCallback,
         };
 
         try {
@@ -24,7 +31,7 @@ const SDK = {
             urlParams.forEach((value, key) => {
                 paramObject[key] = value;
             });
-            __woso.isDeug && console.log(paramObject);
+            OVO.isDeug && console.log(paramObject);
 
             // 转换 sound 参数为布尔值
             const soundEnabled = paramObject.sound === 'true';
@@ -43,33 +50,33 @@ const SDK = {
             adsEnabled ? AdManager.open() : AdManager.close();
 
             const response = await fetch(CONFIG.TEST_URL);
-            __woso.isDeug && console.log(response.ok)
+            OVO.isDeug && console.log(response.ok)
             if (response.ok) {
                 CONFIG.LOCAL_MODE = false;
-                window.__woso.isDot = true;
-           
-                
+                window.OVO.isDot = true;
+
+
                 // 3. 加载广告SDK
                 await AdManager.loadAdSDK();
-                window.__woso.AdManager = AdManager;
+                window.OVO.AdManager = AdManager;
 
                 // 4. 初始化上报管理器
                 try {
                     await ReportManager.init();
-                    __woso.isDeug && console.log('ReportManager initialized with userId:', ReportManager.userId);
+                    OVO.isDeug && console.log('ReportManager initialized with userId:', ReportManager.userId);
                 } catch (error) {
                     console.error('Failed to initialize ReportManager:', error);
                 }
 
-                __woso.isDeug && console.log('成功连接服务器,启用完整功能');
+                OVO.isDeug && console.log('成功连接服务器,启用完整功能');
             }
         } catch (e) {
-            __woso.isDeug && console.log('无法连接服务器,仅启用本地功能');
+            OVO.isDeug && console.log('无法连接服务器,仅启用本地功能');
         }
     }
 }
 // 自动初始化
 if (typeof window !== 'undefined') {
-    SDK.initializeSDK().catch(console.error);
+    OVO.initializeOVO().catch(console.error);
 }
-export default SDK;
+export default OVO;
