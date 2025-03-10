@@ -1,6 +1,6 @@
 const CONFIG = {
-  // API_BASE_URL: 'http://192.168.1.157:13258',
-  API_BASE_URL: 'https://save.gameslog.top',
+  API_BASE_URL: 'http://192.168.1.157:13258',
+  // API_BASE_URL: 'https://save.gameslog.top',
   PAGE_SIZE: 20,
   CACHE_DURATION: 5 * 60 * 1000, // 5分钟缓存
   RETRY_ATTEMPTS: 3,
