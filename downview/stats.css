@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px; /* 根据实际情况调整最大宽度 */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.stats-section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #1a73e8;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+#requestsChart {
+    width: 100%;
+    max-width: 800px; /* 限制 canvas 最大宽度 */
+    height: auto;
+    max-height: 400px; /* 限制 canvas 最大高度 */
+    margin: 0 auto;
+    display: block;
+}
+
+.download-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-item {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.stat-item span {
+    display: block;
+    font-size: 1.2em;
+}
+
+.stat-item:first-child span {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.stat-item:last-child span {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+    .download-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+}
