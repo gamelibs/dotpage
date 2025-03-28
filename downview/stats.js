@@ -8,7 +8,7 @@ async function fetchAndRender() {
         // 显示加载状态
         showLoading();
 
-        const resUrl = false ? 'https://app.gameslog.top/stats' : 'http://localhost:15300/stats';
+        const resUrl = true ? 'https://app.gameslog.top/stats' : 'http://localhost:15300/stats';
         const response = await fetch(resUrl);
         const data = await response.json();
 
