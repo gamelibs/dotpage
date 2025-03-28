@@ -1,6 +1,7 @@
 // 初始化图表变量
 let chart;
 
+
 // 获取数据并渲染图表
 async function fetchAndRender() {
     try {
@@ -13,7 +14,6 @@ async function fetchAndRender() {
 
         // 解析请求数据
         const endpoints = data.endpoints;
-
         const labels = [];
         const successValues = [];
         const failureValues = [];
@@ -109,7 +109,6 @@ async function fetchAndRender() {
 
         // 隐藏加载状态
         hideLoading();
-
     } catch (error) {
         console.error('获取数据失败:', error);
         showError('无法获取统计数据，请检查网络连接');
@@ -154,3 +153,7 @@ window.addEventListener('resize', function () {
         fetchAndRender();
     }
 });
+
+// 设置自动刷新
+let refreshInterval = 10 * 60 * 1000; // 60秒自动刷新
+setInterval(fetchAndRender, refreshInterval);
